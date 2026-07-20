@@ -81,7 +81,7 @@
 </head>
 <body>
 
-    <!-- 一覧画面（追加した漢字をすべて配置） -->
+    <!-- 一覧画面 -->
     <div id="list-page">
         <div class="kanji-btn" onclick="playVideo('雨', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。')">雨</div>
         <div class="kanji-btn" onclick="playVideo('羽', '鳥のふさふさとしたはねが並んでいる様子からできた漢字です。')">羽</div>
@@ -99,7 +99,7 @@
         <div class="kanji-btn" onclick="playVideo('眩', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。')">眩</div>
     </div>
 
-    <!-- 詳細画面（共通） -->
+    <!-- 詳細画面 -->
     <div id="video-page">
         <div class="back-btn" onclick="backToList()">← もどる</div>
         <div class="video-container">
@@ -118,10 +118,7 @@
             listPage.style.display = 'none';
             videoPage.style.display = 'flex';
             
-            // 動画のファイル名を「漢字.mp4」に自動で切り替えます
             kanjiVideo.src = kanjiName + ".mp4";
-            
-            // 説明文を切り替えます
             kanjiDesc.innerHTML = `<strong>${kanjiName}</strong><br>${description}`;
             
             kanjiVideo.currentTime = 0;
@@ -130,7 +127,8 @@
 
         function backToList() {
             kanjiVideo.pause();
-            listPage.style.display = 'flex';
+            // 【修正ポイント】戻るときに「flex」ではなく「grid」を指定して、最初の配置をキープさせます
+            listPage.style.display = 'grid';
             videoPage.style.display = 'none';
         }
     </script>
