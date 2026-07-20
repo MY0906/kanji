@@ -38,7 +38,7 @@
         background-color: #f7f9fa;
     }
 
-    /* 漢字カード本体（タップできるように指のカーソルに） */
+    /* 漢字カード本体 */
     .kanji-card {
         width: 90vw;
         max-width: 500px;
@@ -51,7 +51,7 @@
         align-items: center;
         box-sizing: border-box;
         transition: transform 0.3s, box-shadow 0.3s;
-        cursor: pointer; /* タップできることを示す */
+        cursor: pointer;
     }
 
     .kanji-card.active {
@@ -59,7 +59,7 @@
         box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
 
-    /* 動画を表示するエリア */
+    /* 動画を表示するエリア（タップイベントを完全に貫通させる） */
     .video-wrapper {
         width: 100%;
         aspect-ratio: 1 / 1;
@@ -67,31 +67,30 @@
         overflow: hidden;
         background-color: #ffffff;
         position: relative;
+        pointer-events: none; /* 【重要】ここにあるすべてのタップを貫通させて下のカードに届ける */
     }
 
-    /* 動画への干渉・誤作動を完全に防ぐ */
     .kanji-video {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
     }
 
-    /* 【重要】初期状態では説明文エリアを非表示にする */
+    /* 初期状態では説明文エリアを非表示にする */
     .kanji-info {
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease;
+        transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
         text-align: center;
         width: 100%;
     }
 
-    /* カードをタップして「show-desc」クラスがついたら滑らかに表示する */
+    /* カードをタップして「show-desc」クラスがついたら表示する */
     .kanji-card.show-desc .kanji-info {
-        max-height: 200px; /* 説明文の高さに合わせて広がる */
+        max-height: 300px;
         opacity: 1;
         margin-top: 25px;
     }
@@ -111,6 +110,7 @@
     }
 </style>
 
+<!-- 一覧画面（タップで説明が出る仕組み） -->
 <div id="list-page">
     
     <div class="kanji-card" onclick="toggleDescription(this)">
@@ -179,4 +179,117 @@
         </div>
         <div class="kanji-info">
             <div class="kanji-title">集</div>
-            <div class="kanji-
+            <div class="kanji-text">木の上にたくさんの鳥が集まって止まっている様子からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-wrapper">
+                <video class="kanji-video" src="暑.mp4" playsinline muted loop preload="metadata"></video>
+            </video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">暑</div>
+            <div class="kanji-text">太陽（日）が照りつけて、お墓の上の人もうだるほどあつい様子からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">明</div>
+            <div class="kanji-text">太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="木.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">木</div>
+            <div class="kanji-text">大地にしっかりと根を張り、枝を広げた一本の木の形からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="目.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">目</div>
+            <div class="kanji-text">人間の目の形（ひとみとまぶた）を縦にした形からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="嵐.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">嵐</div>
+            <div class="kanji-text">山の上を激しい風と雨が吹き荒れる様子からできた漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="林.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">林</div>
+            <div class="kanji-text">木が２本並んで、木がたくさん生えている場所を表す漢字です。</div>
+        </div>
+    </div>
+
+    <div class="kanji-card" onclick="toggleDescription(this)">
+        <div class="video-wrapper">
+            <video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video>
+        </div>
+        <div class="kanji-info">
+            <div class="kanji-title">眩</div>
+            <div class="kanji-text">目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // タップしたときに説明文を出したり消したりする関数
+    function toggleDescription(card) {
+        card.classList.toggle('show-desc');
+    }
+
+    // iPadのスクロールに合わせて動画を自動再生・停止する設定
+    const options = {
+        root: null,
+        rootMargin: "-30% 0px -30% 0px",
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const card = entry.target;
+            const video = card.querySelector('.kanji-video');
+
+            if (video) {
+                if (entry.isIntersecting) {
+                    card.classList.add('active');
+                    video.play().catch(e => console.log("Play blocked: ", e));
+                } else {
+                    card.classList.remove('active');
+                    card.classList.remove('show-desc');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            }
+        });
+    }, options);
+
+    document.querySelectorAll('.kanji-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
