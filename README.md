@@ -1,5 +1,5 @@
 <style>
-    /* GitHubが勝手に生成するタイトルやヘッダーを完全に非表示にする */
+    /* GitHubが自動生成する余計な文字やヘッダーを完全に隠す */
     header,
     .markdown-body header,
     body > h1:first-of-type,
@@ -26,19 +26,19 @@
         box-shadow: none !important;
     }
 
-    /* iPad用の縦一列（1文字ずつ）並ぶレイアウト */
+    /* 縦一列のレイアウト */
     #list-page {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 60px; /* 漢字と漢字の間の余白 */
-        padding: 40px 20px 200px 20px; /* 下部に余裕を持たせる */
+        gap: 50px;
+        padding: 40px 20px 200px 20px;
         max-width: 800px;
         margin: 0 auto;
         background-color: #f7f9fa;
     }
 
-    /* 1つの漢字を包むカード（縦長に1文字ずつ集中できるように配置） */
+    /* 漢字カード本体（タップできるように指のカーソルに） */
     .kanji-card {
         width: 90vw;
         max-width: 500px;
@@ -51,39 +51,49 @@
         align-items: center;
         box-sizing: border-box;
         transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer; /* タップできることを示す */
     }
 
-    /* 画面中央に来たカードを少し強調する（iPadで視認性を上げるため） */
     .kanji-card.active {
-        transform: scale(1.02);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        transform: scale(1.01);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
 
     /* 動画を表示するエリア */
     .video-wrapper {
         width: 100%;
-        aspect-ratio: 1 / 1; /* 正方形を維持 */
+        aspect-ratio: 1 / 1;
         border-radius: 16px;
         overflow: hidden;
         background-color: #ffffff;
         position: relative;
     }
 
-    /* iPadで触って誤作動しないように干渉を完全に防ぐ */
+    /* 動画への干渉・誤作動を完全に防ぐ */
     .kanji-video {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        pointer-events: none; /* タップでの一時停止などを完全に禁止 */
+        pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
     }
 
-    /* 漢字の説明文 */
+    /* 【重要】初期状態では説明文エリアを非表示にする */
     .kanji-info {
-        margin-top: 25px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease;
         text-align: center;
         width: 100%;
+    }
+
+    /* カードをタップして「show-desc」クラスがついたら滑らかに表示する */
+    .kanji-card.show-desc .kanji-info {
+        max-height: 200px; /* 説明文の高さに合わせて広がる */
+        opacity: 1;
+        margin-top: 25px;
     }
 
     .kanji-title {
@@ -103,7 +113,7 @@
 
 <div id="list-page">
     
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="雨.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -113,7 +123,7 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="羽.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -123,7 +133,7 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="寒.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -133,7 +143,7 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="叫.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -143,7 +153,7 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="月.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -153,7 +163,7 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="糸.mp4" playsinline muted loop preload="metadata"></video>
         </div>
@@ -163,116 +173,10 @@
         </div>
     </div>
 
-    <div class="kanji-card">
+    <div class="kanji-card" onclick="toggleDescription(this)">
         <div class="video-wrapper">
             <video class="kanji-video" src="集.mp4" playsinline muted loop preload="metadata"></video>
         </div>
         <div class="kanji-info">
             <div class="kanji-title">集</div>
-            <div class="kanji-text">木の上にたくさんの鳥が集まって止まっている様子からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="暑.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">暑</div>
-            <div class="kanji-text">太陽（日）が照りつけて、お墓の上の人もうだるほどあつい様子からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">明</div>
-            <div class="kanji-text">太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="木.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">木</div>
-            <div class="kanji-text">大地にしっかりと根を張り、枝を広げた一本の木の形からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="目.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">目</div>
-            <div class="kanji-text">人間の目の形（ひとみとまぶた）を縦にした形からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="嵐.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">嵐</div>
-            <div class="kanji-text">山の上を激しい風と雨が吹き荒れる様子からできた漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="林.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">林</div>
-            <div class="kanji-text">木が２本並んで、木がたくさん生えている場所を表す漢字です。</div>
-        </div>
-    </div>
-
-    <div class="kanji-card">
-        <div class="video-wrapper">
-            <video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video>
-        </div>
-        <div class="kanji-info">
-            <div class="kanji-title">眩</div>
-            <div class="kanji-text">目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。</div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    // iPadのスクロールを監視して、画面中央にある動画だけを再生するプログラム
-    const options = {
-        root: null,
-        rootMargin: "-30% 0px -30% 0px", // 画面の中央付近（上下30%を除外したエリア）に入ったかを判定
-        threshold: 0.5 // 漢字カードが半分以上中央に入ったら作動
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const card = entry.target;
-            const video = card.querySelector('.kanji-video');
-
-            if (entry.isIntersecting) {
-                // 画面中央にきたら再生する
-                card.classList.add('active');
-                video.play().catch(e => console.log("Play blocked: ", e));
-            } else {
-                // 画面の外にスクロールされたら止めて、動画を最初に戻す
-                card.classList.remove('active');
-                video.pause();
-                video.currentTime = 0;
-            }
-        });
-    }, options);
-
-    // すべての漢字カードに上の監視ルールを適用する
-    document.querySelectorAll('.kanji-card').forEach(card => {
-        observer.observe(card);
-    });
-</script>
+            <div class="kanji-
