@@ -42,19 +42,26 @@
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 60px 20px;
-        background-color: #ffffff; /* 白いスクリーン */
+        padding: 60px 20px 20px 20px; /* 下側のパディングを少し調整 */
+        background-color: #ffffff;
     }
 
-    /* 【下の方】「明」と「眩」の二つをまとめて黒くするセクション */
+    /* 【重要】白から黒へなめらかに繋ぐグラデーション帯 */
+    .gradient-bridge {
+        width: 100%;
+        height: 300px; /* グラデーションの長さ（心地よいなめらかさに調整） */
+        background: linear-gradient(to bottom, #ffffff 0%, #111111 100%);
+    }
+
+    /* 【下の方】「明」と「眩」の二つを表示して背景を黒くしたエリア */
     .section-black {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 100px 20px 300px 20px;
-        background-color: #111111; /* 黒いスクリーン */
+        padding: 40px 20px 300px 20px; /* 上側のパディングを調整 */
+        background-color: #111111;
     }
 
     /* 漢字カード（枠や影のない、スクリーンに動画が直接乗っているデザイン） */
@@ -173,7 +180,7 @@
 <!-- 一覧画面 -->
 <div id="list-page">
     
-    <!-- 1. 【上の方】普通の白背景の漢字を上に置くエリア -->
+    <!-- 1. 【上の方】普通の白背景の漢字エリア -->
     <div class="section-white">
         
         <div class="kanji-card" onclick="openDetail('雨', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。', 'white')">
@@ -249,6 +256,9 @@
         </div>
 
     </div>
+
+    <!-- 新設：白から黒へなめらかに変化する境界線 -->
+    <div class="gradient-bridge"></div>
 
     <!-- 2. 【下の方】「明」と「眩」の二つを表示して背景を黒くしたエリア -->
     <div class="section-black">
