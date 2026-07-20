@@ -10,21 +10,25 @@
             padding: 0;
             background-color: #f7f9fa;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         #list-page {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            justify-items: center;
             align-items: center;
-            height: 100vh;
-            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .kanji-btn {
-            font-size: 8rem;
+            font-size: 6rem;
             color: #333333;
             cursor: pointer;
             transition: transform 0.2s;
             user-select: none;
+            text-align: center;
         }
         .kanji-btn:active {
             transform: scale(0.9);
@@ -77,35 +81,55 @@
 </head>
 <body>
 
+    <!-- 一覧画面（追加した漢字をすべて配置） -->
     <div id="list-page">
-        <div class="kanji-btn" onclick="playVideo()">雨</div>
+        <div class="kanji-btn" onclick="playVideo('雨', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。')">雨</div>
+        <div class="kanji-btn" onclick="playVideo('羽', '鳥のふさふさとしたはねが並んでいる様子からできた漢字です。')">羽</div>
+        <div class="kanji-btn" onclick="playVideo('寒', '家の中で人がわらの中にくるまって、凍えている様子からできた漢字です。')">寒</div>
+        <div class="kanji-btn" onclick="playVideo('叫', '口を大きく開けて、大きな声を張り上げてさけぶ様子からできた漢字です。')">叫</div>
+        <div class="kanji-btn" onclick="playVideo('月', '夜空に浮かぶ美しい三日月の形からできた漢字です。')">月</div>
+        <div class="kanji-btn" onclick="playVideo('糸', '細い糸を何本かつむいで、束ねた形からできた漢字です。')">糸</div>
+        <div class="kanji-btn" onclick="playVideo('集', '木の上にたくさんの鳥が集まって止まっている様子からできた漢字です。')">集</div>
+        <div class="kanji-btn" onclick="playVideo('暑', '太陽（日）が照りつけて、お墓の上の人もうだるほどあつい様子からできた漢字です。')">暑</div>
+        <div class="kanji-btn" onclick="playVideo('明', '太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。')">明</div>
+        <div class="kanji-btn" onclick="playVideo('木', '大地にしっかりと根を張り、枝を広げた一本の木の形からできた漢字です。')">木</div>
+        <div class="kanji-btn" onclick="playVideo('目', '人間の目の形（ひとみとまぶた）を縦にした形からできた漢字です。')">目</div>
+        <div class="kanji-btn" onclick="playVideo('嵐', '山の上を激しい風と雨が吹き荒れる様子からできた漢字です。')">嵐</div>
+        <div class="kanji-btn" onclick="playVideo('林', '木が２本並んで、木がたくさん生えている場所を表す漢字です。')">林</div>
+        <div class="kanji-btn" onclick="playVideo('眩', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。')">眩</div>
     </div>
 
+    <!-- 詳細画面（共通） -->
     <div id="video-page">
         <div class="back-btn" onclick="backToList()">← もどる</div>
         <div class="video-container">
-            <video id="ame-video" src="雨.mp4" playsinline></video>
+            <video id="kanji-video" src="" playsinline></video>
         </div>
-        <div class="description-text">
-            <strong>雨（あめ）</strong><br>
-            空から水滴がぽつぽつと降ってくる様子からできた漢字です。
-        </div>
+        <div class="description-text" id="kanji-desc"></div>
     </div>
 
     <script>
         const listPage = document.getElementById('list-page');
         const videoPage = document.getElementById('video-page');
-        const ameVideo = document.getElementById('ame-video');
+        const kanjiVideo = document.getElementById('kanji-video');
+        const kanjiDesc = document.getElementById('kanji-desc');
 
-        function playVideo() {
+        function playVideo(kanjiName, description) {
             listPage.style.display = 'none';
             videoPage.style.display = 'flex';
-            ameVideo.currentTime = 0;
-            ameVideo.play();
+            
+            // 動画のファイル名を「漢字.mp4」に自動で切り替えます
+            kanjiVideo.src = kanjiName + ".mp4";
+            
+            // 説明文を切り替えます
+            kanjiDesc.innerHTML = `<strong>${kanjiName}</strong><br>${description}`;
+            
+            kanjiVideo.currentTime = 0;
+            kanjiVideo.play();
         }
 
         function backToList() {
-            ameVideo.pause();
+            kanjiVideo.pause();
             listPage.style.display = 'flex';
             videoPage.style.display = 'none';
         }
