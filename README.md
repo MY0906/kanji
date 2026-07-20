@@ -1,9 +1,10 @@
 <style>
-    /* GitHub Pagesが自動生成する上部のタイトル(kanji)と不要なテキストを強制的に非表示にするトリック */
+    /* GitHub Pagesが自動生成する上部のタイトルや不要なエリアを完全に非表示にする */
     body > h1:first-of-type,
     body > p:first-of-type,
     header,
-    .markdown-body > h1:first-child {
+    .markdown-body > h1:first-child,
+    #header-container {
         display: none !important;
     }
 
@@ -15,20 +16,7 @@
         overflow-x: hidden;
     }
 
-    /* タイトルエリア */
-    #header-container {
-        padding: 20px;
-        border-bottom: 1px solid #e1e4e8;
-        background-color: #fff;
-    }
-    #main-title {
-        font-size: 2rem;
-        color: #0366d6;
-        margin: 0;
-        user-select: none;
-    }
-
-    /* 一覧画面（グリッド配置） */
+    /* 一覧画面（画面上部からの余白を綺麗に調整） */
     #list-page {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -113,12 +101,7 @@
     }
 </style>
 
-<!-- タイトルエリア（ご希望のひらがな表記のみ残します） -->
-<div id="header-container">
-    <h1 id="main-title">かんじ</h1>
-</div>
-
-<!-- 一覧画面 -->
+<!-- 一覧画面（文字を無くし、動画サムネイルだけが並ぶ美しいデザインに） -->
 <div id="list-page">
     <div class="kanji-thumb-container" onclick="openDetail('雨', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
         <video class="kanji-video-thumb" src="雨.mp4" playsinline muted preload="metadata"></video>
@@ -164,7 +147,7 @@
     </div>
 </div>
 
-<!-- 詳細画面（ループ再生対応） -->
+<!-- 詳細画面 -->
 <div id="video-page">
     <div class="back-btn" onclick="closeDetail()">← もどる</div>
     <div class="video-container">
@@ -179,21 +162,18 @@
     const mainKanjiVideo = document.getElementById('main-kanji-video');
     const kanjiDesc = document.getElementById('kanji-desc');
 
-    // サムネイルプレビュー再生（ミュート）
     function startPreview(container) {
         const videoThumb = container.querySelector('.kanji-video-thumb');
         videoThumb.currentTime = 0;
         videoThumb.play().catch(e => console.log("Preview play blocked: ", e));
     }
 
-    // サムネイルプレビュー停止、静止画へ
     function stopPreview(container) {
         const videoThumb = container.querySelector('.kanji-video-thumb');
         videoThumb.pause();
         videoThumb.currentTime = 0;
     }
 
-    // 詳細画面を開く（自動ループ再生開始）
     function openDetail(kanjiName, description) {
         listPage.style.display = 'none';
         videoPage.style.display = 'flex';
@@ -205,7 +185,6 @@
         mainKanjiVideo.play();
     }
 
-    // 詳細画面を閉じる
     function closeDetail() {
         mainKanjiVideo.pause();
         listPage.style.display = 'grid';
