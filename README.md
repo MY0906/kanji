@@ -114,5 +114,90 @@
 </style>
 
 <div id="list-page">
-    <div class="kanji-thumb-container" onclick="openDetail('雨', '空から水滴が
-    
+    <div class="kanji-thumb-container" onclick="openDetail('雨', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="雨.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('羽', '鳥のふさふさとしたはねが並んでいる様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="羽.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('寒', '家の中で人がわらの中にくるまって、凍えている様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="寒.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('叫', '口を大きく開けて、大きな声を張り上げてさけぶ様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="叫.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('月', '夜空に浮かぶ美しい三日月の形からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="月.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('糸', '細い糸を何本かつむいで、束ねた形からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="糸.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('集', '木の上にたくさんの鳥が集まって止まっている様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="集.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('暑', '太陽（日）が照りつけて、お墓の上の人もうだるほどあつい様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="暑.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('明', '太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="明.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('木', '大地にしっかりと根を張り、枝を広げた一本の木の形からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="木.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('目', '人間の目の形（ひとみとまぶた）を縦にした形からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="目.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('嵐', '山の上を激しい風と雨が吹き荒れる様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="嵐.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('林', '木が２本並んで、木がたくさん生えている場所を表す漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="林.mp4" playsinline muted preload="metadata"></video>
+    </div>
+    <div class="kanji-thumb-container" onclick="openDetail('眩', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。')" onmouseover="startPreview(this)" onmouseout="stopPreview(this)">
+        <video class="kanji-video-thumb" src="眩.mp4" playsinline muted preload="metadata"></video>
+    </div>
+</div>
+
+<div id="video-page">
+    <div class="back-btn" onclick="closeDetail()">← もどる</div>
+    <div class="video-container">
+        <video id="main-kanji-video" src="" controls playsinline loop></video>
+    </div>
+    <div class="description-text" id="kanji-desc"></div>
+</div>
+
+<script>
+    const listPage = document.getElementById('list-page');
+    const videoPage = document.getElementById('video-page');
+    const mainKanjiVideo = document.getElementById('main-kanji-video');
+    const kanjiDesc = document.getElementById('kanji-desc');
+
+    function startPreview(container) {
+        const videoThumb = container.querySelector('.kanji-video-thumb');
+        videoThumb.currentTime = 0;
+        videoThumb.play().catch(e => console.log("Preview play blocked: ", e));
+    }
+
+    function stopPreview(container) {
+        const videoThumb = container.querySelector('.kanji-video-thumb');
+        videoThumb.pause();
+        videoThumb.currentTime = 0;
+    }
+
+    function openDetail(kanjiName, description) {
+        listPage.style.display = 'none';
+        videoPage.style.display = 'flex';
+        
+        mainKanjiVideo.src = kanjiName + ".mp4";
+        kanjiDesc.innerHTML = `<strong>${kanjiName}</strong><br>${description}`;
+        
+        mainKanjiVideo.currentTime = 0;
+        mainKanjiVideo.play();
+    }
+
+    function closeDetail() {
+        mainKanjiVideo.pause();
+        listPage.style.display = 'grid';
+        videoPage.style.display = 'none';
+    }
+</script>
