@@ -35,22 +35,30 @@
         background-color: #ffffff;
     }
 
-    /* 【上の方】普通の白背景の漢字を並べるセクション */
+    /* 【上の方】普通の白背景の漢字エリア */
     .section-white {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 60px 20px 20px 20px;
+        padding: 60px 20px 0px 20px;
         background-color: #ffffff;
     }
 
-    /* 白から黒へなめらかに繋ぐグラデーション帯 */
+    /* 【改良】よりふんわり自然に溶け込むイージンググラデーション */
     .gradient-bridge {
         width: 100%;
-        height: 300px;
-        background: linear-gradient(to bottom, #ffffff 0%, #111111 100%);
+        height: 160px; /* 自然な長さに短縮 */
+        background: linear-gradient(
+            to bottom, 
+            #ffffff 0%, 
+            #f2f2f2 20%, 
+            #d9d9d9 40%, 
+            #808080 60%, 
+            #262626 80%, 
+            #111111 100%
+        );
     }
 
     /* 【下の方】黒背景の漢字をまとめて表示するエリア */
@@ -60,7 +68,7 @@
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 40px 20px 300px 20px;
+        padding: 0px 20px 300px 20px;
         background-color: #111111;
     }
 
