@@ -49,7 +49,7 @@
     /* 【超滑らか】境界線を感じさせないシームレスなグラデーション帯 */
     .gradient-bridge {
         width: 100%;
-        height: 450px; /* しっかり長さを取って滑らかに変化させます */
+        height: 450px;
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
@@ -221,12 +221,6 @@
         <div class="kanji-card" onclick="openDetail('叫', '口を大きく開けて、大きな声を張り上げてさけぶ様子からできた漢字です。', 'white')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="叫.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
-        </div>
-
-        <div class="kanji-card" onclick="openDetail('月', '夜空に浮かぶ美しい三日月の形からできた漢字です。', 'white')">
-            <div class="video-wrapper">
-                <video class="kanji-video" src="月.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
