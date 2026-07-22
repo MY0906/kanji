@@ -42,29 +42,29 @@
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 60px 20px 20px 20px; /* 下側のパディングを少し調整 */
+        padding: 60px 20px 20px 20px;
         background-color: #ffffff;
     }
 
-    /* 【重要】白から黒へなめらかに繋ぐグラデーション帯 */
+    /* 白から黒へなめらかに繋ぐグラデーション帯 */
     .gradient-bridge {
         width: 100%;
-        height: 300px; /* グラデーションの長さ（心地よいなめらかさに調整） */
+        height: 300px;
         background: linear-gradient(to bottom, #ffffff 0%, #111111 100%);
     }
 
-    /* 【下の方】「明」と「眩」の二つを表示して背景を黒くしたエリア */
+    /* 【下の方】黒背景の漢字をまとめて表示するエリア */
     .section-black {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 50px;
-        padding: 40px 20px 300px 20px; /* 上側のパディングを調整 */
+        padding: 40px 20px 300px 20px;
         background-color: #111111;
     }
 
-    /* 漢字カード（枠や影のない、スクリーンに動画が直接乗っているデザイン） */
+    /* 漢字カード（枠や影のないデザイン） */
     .kanji-card {
         width: 85vw;
         max-width: 450px;
@@ -257,10 +257,10 @@
 
     </div>
 
-    <!-- 新設：白から黒へなめらかに変化する境界線 -->
+    <!-- 白から黒へなめらかに変化する境界線 -->
     <div class="gradient-bridge"></div>
 
-    <!-- 2. 【下の方】「明」と「眩」の二つを表示して背景を黒くしたエリア -->
+    <!-- 2. 【下の方】黒背景の漢字をまとめて表示するエリア -->
     <div class="section-black">
         
         <div class="kanji-card" onclick="openDetail('明', '太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。', 'black')">
@@ -272,6 +272,24 @@
         <div class="kanji-card" onclick="openDetail('眩', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video>
+            </div>
+        </div>
+
+        <div class="kanji-card" onclick="openDetail('影', '光が当たって物に遮られ、うしろに黒く浮かび上がる様子からできた漢字です。', 'black')">
+            <div class="video-wrapper">
+                <video class="kanji-video" src="影.mp4" playsinline muted loop preload="metadata"></video>
+            </div>
+        </div>
+
+        <div class="kanji-card" onclick="openDetail('幻', '糸が絡み合って形がころころと変わり、姿をくらます様子からできた漢字です。', 'black')">
+            <div class="video-wrapper">
+                <video class="kanji-video" src="幻.mp4" playsinline muted loop preload="metadata"></video>
+            </div>
+        </div>
+
+        <div class="kanji-card" onclick="openDetail('光', '人が頭の上に松明（たいまつ）を載せて、周りをピカッと照らしている様子からできた漢字です。', 'black')">
+            <div class="video-wrapper">
+                <video class="kanji-video" src="光.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
