@@ -49,7 +49,11 @@
     /* 【超滑らか】境界線を感じさせないシームレスなグラデーション帯 */
     .gradient-bridge {
         width: 100%;
-        height: 450px;
+        padding: 60px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
@@ -136,10 +140,12 @@
     /* タップした漢字のエリアに合わせて詳細画面の背景も変化 */
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #111111 !important; }
+    #video-page.bg-gray { background-color: #333333 !important; }
     
     /* 詳細画面の説明文の色調整 */
     #video-page.bg-white .description-text { color: #333333; }
     #video-page.bg-black .description-text { color: #ffffff; }
+    #video-page.bg-gray .description-text { color: #ffffff; }
 
     .video-container {
         width: 80vw;
@@ -186,8 +192,9 @@
         color: #ffffff;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    /* 黒背景の時は白ボタン */
-    #video-page.bg-black .back-btn {
+    /* 黒背景・グレー背景の時は白ボタン */
+    #video-page.bg-black .back-btn,
+    #video-page.bg-gray .back-btn {
         background-color: #ffffff;
         color: #111111;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -268,8 +275,14 @@
 
     </div>
 
-    <!-- 白から黒へなめらかに変化する境界線 -->
-    <div class="gradient-bridge"></div>
+    <!-- 白から黒へなめらかに変化するグラデーション帯（「深」をここに配置） -->
+    <div class="gradient-bridge">
+        <div class="kanji-card" onclick="openDetail('深', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gray')">
+            <div class="video-wrapper">
+                <video class="kanji-video" src="深.mp4" playsinline muted loop preload="metadata"></video>
+            </div>
+        </div>
+    </div>
 
     <!-- 2. 【下の方】黒背景の漢字をまとめて表示するエリア -->
     <div class="section-black">
@@ -331,6 +344,8 @@
         videoPage.className = '';
         if (bgType === 'white') {
             videoPage.classList.add('bg-white');
+        } else if (bgType === 'gray') {
+            videoPage.classList.add('bg-gray');
         } else {
             videoPage.classList.add('bg-black');
         }
