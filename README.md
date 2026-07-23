@@ -45,10 +45,10 @@
         background-color: #ffffff;
     }
 
-    /* 滑らかに広がる動的グラデーションエリア（一覧画面） */
+    /* パララックス・動的背景ブリッジエリア */
     .gradient-bridge {
         width: 100%;
-        padding: 200px 20px;
+        padding: 250px 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -56,16 +56,12 @@
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
-            #f9f9f9 10%,
-            #e6e6e6 25%,
-            #cccccc 40%,
-            #888888 50%,
-            #444444 60%,
-            #1a1a1a 75%,
-            #0a0a0a 90%,
+            #e6e6e6 30%,
+            #777777 50%,
+            #1a1a1a 70%,
             #000000 100%
         );
-        transition: background 0.2s linear;
+        will-change: background;
         position: relative;
     }
 
@@ -80,7 +76,7 @@
         background-color: #000000;
     }
 
-    /* 漢字カード */
+    /* 漢字カード基本構造 */
     .kanji-card {
         width: 85vw;
         max-width: 450px;
@@ -102,12 +98,10 @@
         transform: scale(1.04);
     }
 
+    /* 「深」カードのインタラクティブ浮遊＆グロー演出 */
     .kanji-card.special-fuka {
-        transition: transform 0.3s ease, filter 0.3s ease;
-    }
-    .kanji-card.special-fuka.active {
-        transform: scale(1.06);
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+        transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.3, 1), filter 0.15s cubic-bezier(0.1, 0.8, 0.3, 1);
+        will-change: transform, filter;
     }
 
     .media-wrapper {
@@ -164,7 +158,6 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
-    /* ★詳細画面のグラデーション背景（一覧と同じ滑らかなトーンに調整）★ */
     #video-page.bg-gradient { 
         background: linear-gradient(
             to bottom,
@@ -285,7 +278,7 @@
         </div>
     </div>
 
-    <!-- 【深】エリア -->
+    <!-- 【深】パララックス＆グロー連動エリア -->
     <div class="gradient-bridge" id="bridge-zone">
         <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
@@ -338,28 +331,48 @@
 
     let savedScrollPosition = 0;
 
-    /* 一覧画面の動的グラデーション */
+    /* ★リアルタイム連動（Parallax背景＆カードの浮遊・グロー制御）★ */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
-        const rect = bridgeZone.getBoundingClientRect();
+        const bridgeRect = bridgeZone.getBoundingClientRect();
+        const cardRect = fukaCard.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        let progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-        progress = Math.max(0, Math.min(1, progress));
+        // 1. 背景グラデーションのパララックス追従
+        let bridgeProgress = (windowHeight - bridgeRect.top) / (windowHeight + bridgeRect.height);
+        bridgeProgress = Math.max(0, Math.min(1, bridgeProgress));
 
-        const p1 = Math.round(progress * 100);
-        const p0 = Math.max(0, p1 - 35);
-        const p2 = Math.min(100, p1 + 35);
+        const mid = Math.round(bridgeProgress * 100);
+        const topStop = Math.max(0, mid - 35);
+        const bottomStop = Math.min(100, mid + 35);
 
         bridgeZone.style.background = `linear-gradient(
             to bottom,
             #ffffff 0%,
-            #e6e6e6 ${p0}%,
-            #777777 ${p1}%,
-            #1a1a1a ${p2}%,
+            #e6e6e6 ${topStop}%,
+            #777777 ${mid}%,
+            #1a1a1a ${bottomStop}%,
             #000000 100%
         )`;
+
+        // 2. 「深」カードが画面中央を通る際のスケール＆グロー効果
+        const cardCenter = cardRect.top + cardRect.height / 2;
+        const windowCenter = windowHeight / 2;
+        
+        // 画面中央からの距離（0：ピッタリ中央、1：画面端）
+        const distanceFromCenter = Math.abs(windowCenter - cardCenter) / (windowHeight / 2);
+        const closeness = Math.max(0, 1 - distanceFromCenter); // 1に近いほど画面中央
+
+        // 浮き上がり量 (最大1.08倍)
+        const scale = 1.0 + (closeness * 0.08);
+        
+        // グロー効果の強さ (輝きとぼかし範囲の制御)
+        const shadowBlur = closeness * 25;
+        const shadowAlpha = closeness * 0.5;
+
+        fukaCard.style.transform = `scale(${scale})`;
+        fukaCard.style.filter = `drop-shadow(0 0 ${shadowBlur}px rgba(255, 255, 255, ${shadowAlpha}))`;
     });
 
     function openDetail(kanjiName, mediaFile, description, bgType, mediaType = 'video') {
@@ -413,10 +426,14 @@
             const video = card.querySelector('.kanji-video');
 
             if (entry.isIntersecting) {
-                card.classList.add('active');
+                if (!card.classList.contains('special-fuka')) {
+                    card.classList.add('active');
+                }
                 if (video) video.play().catch(e => console.log("Preview play blocked: ", e));
             } else {
-                card.classList.remove('active');
+                if (!card.classList.contains('special-fuka')) {
+                    card.classList.remove('active');
+                }
                 if (video) {
                     video.pause();
                     video.currentTime = 0;
