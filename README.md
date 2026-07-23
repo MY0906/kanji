@@ -45,10 +45,10 @@
         background-color: #ffffff;
     }
 
-    /* ★広範で超滑らかなグラデーションブリッジエリア★ */
+    /* 広域で超滑らかなグラデーションブリッジエリア */
     .gradient-bridge {
         width: 100%;
-        padding: 250px 0; /* 「深」の手前から滑らかにグラデーションさせるための広めの余白 */
+        padding: 250px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -128,7 +128,7 @@
         will-change: transform, opacity;
     }
 
-    /* 泡の上昇アニメーション */
+    /* 泡の上昇アニメーション（一覧用） */
     @keyframes floatUp {
         0% {
             transform: translateY(0) translateX(0);
@@ -144,6 +144,36 @@
             transform: translateY(-460px) translateX(15px);
             opacity: 0;
         }
+    }
+
+    /* 詳細画面用の泡アニメーション */
+    @keyframes floatUpDetail {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+        }
+        20% {
+            opacity: 0.8;
+        }
+        80% {
+            opacity: 0.6;
+        }
+        100% {
+            transform: translateY(-55vh) translateX(20px);
+            opacity: 0;
+        }
+    }
+
+    .sea-bubble-detail {
+        position: absolute;
+        bottom: -20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: floatUpDetail 6s infinite ease-in-out;
+        will-change: transform, opacity;
+        z-index: 1;
     }
 
     /* 「深」カードのインタラクティブ演出 */
@@ -231,6 +261,8 @@
         justify-content: center;
         align-items: center;
         background: transparent !important;
+        position: relative;
+        overflow: hidden; /* 泡がメディア枠外に出ないようマスク */
     }
     
     #main-kanji-video {
@@ -241,6 +273,7 @@
         background: transparent !important;
         -webkit-user-select: none;
         user-select: none;
+        z-index: 2;
     }
 
     #main-kanji-img {
@@ -254,6 +287,7 @@
         box-shadow: none !important;
         -webkit-user-select: none;
         user-select: none;
+        z-index: 2;
     }
     
     .description-text {
@@ -263,6 +297,7 @@
         max-width: 80%;
         line-height: 1.7;
         font-weight: 500;
+        z-index: 2;
     }
 
     .back-btn {
@@ -382,10 +417,11 @@
     const bridgeZone = document.getElementById('bridge-zone');
     const fukaCard = document.getElementById('fuka-card');
     const bubbleStage = document.getElementById('bubble-stage');
+    const detailMediaContainer = document.getElementById('detail-media-container');
 
     let savedScrollPosition = 0;
 
-    /* ★シンプル＆控えめな泡の自動生成★ */
+    /* ★一覧用：シンプル泡の生成★ */
     function createBubbles() {
         if (!bubbleStage) return;
         const bubbleCount = 10;
@@ -410,7 +446,38 @@
     }
     createBubbles();
 
-    /* ★広域な背景パララックス＆「深」発光制御★ */
+    /* ★詳細画面用：泡の生成とクリア★ */
+    function createDetailBubbles() {
+        clearDetailBubbles();
+        if (!detailMediaContainer) return;
+
+        const bubbleCount = 12;
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('sea-bubble-detail');
+            
+            const size = Math.random() * 14 + 8;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            bubble.style.left = `${Math.random() * 90}%`;
+            
+            const duration = Math.random() * 3 + 4;
+            const delay = Math.random() * 4;
+            bubble.style.animationDuration = `${duration}s`;
+            bubble.style.animationDelay = `${delay}s`;
+            
+            detailMediaContainer.appendChild(bubble);
+        }
+    }
+
+    function clearDetailBubbles() {
+        if (!detailMediaContainer) return;
+        const oldBubbles = detailMediaContainer.querySelectorAll('.sea-bubble-detail');
+        oldBubbles.forEach(b => b.remove());
+    }
+
+    /* ★背景パララックス＆「深」発光制御★ */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -418,7 +485,6 @@
         const cardRect = fukaCard.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // ブリッジ領域が画面に入った瞬間から出る瞬間までの進行度（0～1）
         let progress = (windowHeight - bridgeRect.top) / (windowHeight + bridgeRect.height);
         progress = Math.max(0, Math.min(1, progress));
 
@@ -481,11 +547,19 @@
             mainKanjiVideo.play().catch(e => console.log("Play blocked: ", e));
         }
 
+        /* 「深」を開いた時だけ泡を生成、それ以外はクリア */
+        if (kanjiName === '深') {
+            createDetailBubbles();
+        } else {
+            clearDetailBubbles();
+        }
+
         kanjiDesc.innerHTML = `<span style="font-size: 2.2rem; font-weight: bold;">${kanjiName}</span><br><br>${description}`;
     }
 
     function closeDetail() {
         mainKanjiVideo.pause();
+        clearDetailBubbles();
         listPage.style.display = 'flex';
         videoPage.style.display = 'none';
 
