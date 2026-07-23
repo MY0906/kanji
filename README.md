@@ -299,7 +299,6 @@
             </div>
         </div>
 
-        <!-- 「影2.mp4」に変更 -->
         <div class="kanji-card" onclick="openDetail('影', '影2.mp4', '光が当たって物に遮られ、うしろに黒く浮かび上がる様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="影2.mp4" playsinline muted loop preload="metadata"></video>
@@ -318,7 +317,6 @@
             </div>
         </div>
 
-        <!-- 「星」を新しく追加 -->
         <div class="kanji-card" onclick="openDetail('星', '星.mp4', '太陽（日）のもとで、芽（生）がすくすくと育つように夜空にきらきら光る星を表す漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="星.mp4" playsinline muted loop preload="metadata"></video>
@@ -344,8 +342,14 @@
     const mainKanjiVideo = document.getElementById('main-kanji-video');
     const kanjiDesc = document.getElementById('kanji-desc');
 
-    // 詳細ページを開く関数（動画ファイル名も受け取れるように調整）
+    // スクロール位置を保持する変数
+    let savedScrollPosition = 0;
+
+    // 詳細ページを開く関数
     function openDetail(kanjiName, videoFile, description, bgType) {
+        // 現在のスクロール位置を記憶する
+        savedScrollPosition = window.scrollY || document.documentElement.scrollTop;
+
         listPage.style.display = 'none';
         videoPage.style.display = 'flex';
         
@@ -370,6 +374,9 @@
         mainKanjiVideo.pause();
         listPage.style.display = 'flex';
         videoPage.style.display = 'none';
+
+        // 記憶しておいたスクロール位置に一瞬で復元する
+        window.scrollTo(0, savedScrollPosition);
     }
 
     // iPadのスクロール自動再生の設定
