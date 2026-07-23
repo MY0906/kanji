@@ -125,7 +125,7 @@
         user-select: none;
     }
 
-    /* 透過PNG画像表示用（特殊なCSS処理なしでシンプルに表示） */
+    /* 透過PNG画像表示用 */
     .kanji-img {
         width: 100%;
         height: 100%;
@@ -265,11 +265,11 @@
         </div>
     </div>
 
-    <!-- 【深】エリア：ファイル名を hukai.png に指定 -->
+    <!-- 【深】エリア：ファイル名を hukai_transparent.png に指定 -->
     <div class="gradient-bridge" id="bridge-zone">
-        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
+        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
-                <img class="kanji-img" src="hukai.png" alt="深">
+                <img class="kanji-img" src="hukai_transparent.png" alt="深">
             </div>
         </div>
     </div>
