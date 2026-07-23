@@ -82,8 +82,10 @@
     .kanji-card {
         width: 85vw;
         max-width: 450px;
+        background: transparent !important;
         background-color: transparent !important;
         border: none !important;
+        outline: none !important;
         box-shadow: none !important;
         padding: 0 !important;
         display: flex;
@@ -109,29 +111,39 @@
     .media-wrapper {
         width: 100%;
         aspect-ratio: 1 / 1;
-        background-color: transparent;
+        background: transparent !important;
+        background-color: transparent !important;
         position: relative;
         pointer-events: none; 
         display: flex;
         justify-content: center;
         align-items: center;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .kanji-video {
         width: 100%;
         height: 100%;
         object-fit: contain;
+        background: transparent !important;
         -webkit-user-select: none;
         user-select: none;
     }
 
-    /* 透過PNG画像表示用 */
+    /* 透過PNG画像表示用（リセット徹底強化） */
     .kanji-img {
         width: 100%;
         height: 100%;
         object-fit: contain;
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
         -webkit-user-select: none;
         user-select: none;
+        mix-blend-mode: normal !important;
     }
 
     /* 詳細画面 */
@@ -172,6 +184,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background: transparent !important;
     }
     
     #main-kanji-video {
@@ -179,6 +192,7 @@
         height: 100%;
         object-fit: contain;
         pointer-events: none;
+        background: transparent !important;
         -webkit-user-select: none;
         user-select: none;
     }
@@ -188,6 +202,10 @@
         height: 100%;
         object-fit: contain;
         pointer-events: none;
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
         -webkit-user-select: none;
         user-select: none;
     }
@@ -265,7 +283,7 @@
         </div>
     </div>
 
-    <!-- 【深】エリア：ファイル名を hukai_transparent.png に指定 -->
+    <!-- 【深】エリア -->
     <div class="gradient-bridge" id="bridge-zone">
         <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
