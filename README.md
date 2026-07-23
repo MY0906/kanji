@@ -45,15 +45,14 @@
         background-color: #ffffff;
     }
 
-    /* ★滑らかに超広範囲に広がる動的グラデーションエリア★ */
+    /* 滑らかに広がる動的グラデーションエリア（一覧画面） */
     .gradient-bridge {
         width: 100%;
-        padding: 200px 20px; /* 上下の距離を広げてグラデーションを長く見せる */
+        padding: 200px 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
-        /* 滑らかな階調（イージング）を設定 */
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
@@ -165,19 +164,21 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
+    /* ★詳細画面のグラデーション背景（一覧と同じ滑らかなトーンに調整）★ */
     #video-page.bg-gradient { 
         background: linear-gradient(
             to bottom,
-            #111111 0%,
-            #333333 40%,
-            #111111 80%,
+            #ffffff 0%,
+            #d9d9d9 20%,
+            #888888 50%,
+            #222222 80%,
             #000000 100%
         ) !important; 
     }
     
     #video-page.bg-white .description-text { color: #333333; }
     #video-page.bg-black .description-text { color: #ffffff; }
-    #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
+    #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
 
     .media-container {
         width: 80vw;
@@ -337,7 +338,7 @@
 
     let savedScrollPosition = 0;
 
-    /* ★スクロール位置に合わせて滑らかに動くグラデーション★ */
+    /* 一覧画面の動的グラデーション */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -347,7 +348,6 @@
         let progress = (windowHeight - rect.top) / (windowHeight + rect.height);
         progress = Math.max(0, Math.min(1, progress));
 
-        // 計算ポイントを細かく分けて階調をなめらかに表現
         const p1 = Math.round(progress * 100);
         const p0 = Math.max(0, p1 - 35);
         const p2 = Math.min(100, p1 + 35);
