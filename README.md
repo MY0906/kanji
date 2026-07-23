@@ -45,10 +45,10 @@
         background-color: #ffffff;
     }
 
-    /* 超滑らかなグラデーションブリッジエリア */
+    /* ★広範で超滑らかなグラデーションブリッジエリア★ */
     .gradient-bridge {
         width: 100%;
-        padding: 80px 0;
+        padding: 250px 0; /* 「深」の手前から滑らかにグラデーションさせるための広めの余白 */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -103,7 +103,7 @@
         transform: scale(1.04);
     }
 
-    /* ★「深」カード専用のコンパクトな泡エリア★ */
+    /* 「深」カード専用のコンパクトな泡エリア */
     .bubble-stage-compact {
         width: 85vw;
         max-width: 450px;
@@ -112,23 +112,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden; /* カード範囲外に泡が出ないようにカット */
+        overflow: hidden;
         box-sizing: border-box;
     }
 
-    /* ★シンプル＆フラットな泡のスタイル★ */
+    /* シンプル＆フラットな泡のスタイル */
     .sea-bubble {
         position: absolute;
         bottom: -20px;
-        background: rgba(255, 255, 255, 0.15); /* 極薄の透過白 */
-        border: 1.5px solid rgba(255, 255, 255, 0.6); /* プレーンな白線 */
+        background: rgba(255, 255, 255, 0.15);
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
         border-radius: 50%;
         pointer-events: none;
         animation: floatUp 6s infinite ease-in-out;
         will-change: transform, opacity;
     }
 
-    /* 泡の上昇アニメーション（カード高さ内でのみ移動） */
+    /* 泡の上昇アニメーション */
     @keyframes floatUp {
         0% {
             transform: translateY(0) translateX(0);
@@ -329,7 +329,7 @@
         </div>
     </div>
 
-    <!-- 【深】コンパクト＆シンプル泡エリア -->
+    <!-- 【深】広域滑らかグラデーション ＆ 泡エリア -->
     <div class="gradient-bridge" id="bridge-zone">
         <div class="bubble-stage-compact" id="bubble-stage">
             <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
@@ -388,21 +388,19 @@
     /* ★シンプル＆控えめな泡の自動生成★ */
     function createBubbles() {
         if (!bubbleStage) return;
-        const bubbleCount = 10; // 数も少し抑えてすっきりと
+        const bubbleCount = 10;
         
         for (let i = 0; i < bubbleCount; i++) {
             const bubble = document.createElement('div');
             bubble.classList.add('sea-bubble');
             
-            // 小さめの丸（6px ～ 18px）
             const size = Math.random() * 12 + 6;
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
             
-            // カード幅の中でのみランダム配置
             bubble.style.left = `${Math.random() * 90}%`;
             
-            const duration = Math.random() * 3 + 4; // 4s ～ 7s
+            const duration = Math.random() * 3 + 4;
             const delay = Math.random() * 5;
             bubble.style.animationDuration = `${duration}s`;
             bubble.style.animationDelay = `${delay}s`;
@@ -412,7 +410,7 @@
     }
     createBubbles();
 
-    /* ★背景パララックス＆「深」発光制御★ */
+    /* ★広域な背景パララックス＆「深」発光制御★ */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -420,15 +418,16 @@
         const cardRect = fukaCard.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
+        // ブリッジ領域が画面に入った瞬間から出る瞬間までの進行度（0～1）
         let progress = (windowHeight - bridgeRect.top) / (windowHeight + bridgeRect.height);
         progress = Math.max(0, Math.min(1, progress));
 
-        const easedProgress = Math.pow(progress, 1.2);
+        const easedProgress = Math.pow(progress, 1.1);
 
-        const stop1 = Math.round(easedProgress * 15);
-        const stop2 = Math.round(easedProgress * 40);
-        const stop3 = Math.round(easedProgress * 65);
-        const stop4 = Math.round(easedProgress * 88);
+        const stop1 = Math.round(easedProgress * 18);
+        const stop2 = Math.round(easedProgress * 42);
+        const stop3 = Math.round(easedProgress * 68);
+        const stop4 = Math.round(easedProgress * 90);
 
         bridgeZone.style.background = `linear-gradient(
             to bottom,
