@@ -34,6 +34,7 @@
         background-color: #ffffff;
     }
 
+    /* 白背景エリア */
     .section-white {
         width: 100%;
         display: flex;
@@ -44,6 +45,7 @@
         background-color: #ffffff;
     }
 
+    /* 動的グラデーションエリア */
     .gradient-bridge {
         width: 100%;
         padding: 120px 20px;
@@ -65,6 +67,7 @@
         position: relative;
     }
 
+    /* 黒背景エリア */
     .section-black {
         width: 100%;
         display: flex;
@@ -75,6 +78,7 @@
         background-color: #000000;
     }
 
+    /* 漢字カード */
     .kanji-card {
         width: 85vw;
         max-width: 450px;
@@ -121,14 +125,13 @@
         user-select: none;
     }
 
-    /* 乗算で一覧表示時の画像の白背景を透過させる */
+    /* 透過PNG画像表示用（特殊なCSS処理なしでシンプルに表示） */
     .kanji-img {
         width: 100%;
         height: 100%;
         object-fit: contain;
         -webkit-user-select: none;
         user-select: none;
-        mix-blend-mode: multiply;
     }
 
     /* 詳細画面 */
@@ -148,14 +151,20 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
-    /* 「深」の詳細画面は背景を白にして文字が見えるようにする */
+    /* 詳細画面のグラデーション背景 */
     #video-page.bg-gradient { 
-        background-color: #ffffff !important; 
+        background: linear-gradient(
+            to bottom,
+            #111111 0%,
+            #333333 40%,
+            #111111 80%,
+            #000000 100%
+        ) !important; 
     }
     
     #video-page.bg-white .description-text { color: #333333; }
     #video-page.bg-black .description-text { color: #ffffff; }
-    #video-page.bg-gradient .description-text { color: #333333; }
+    #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
 
     .media-container {
         width: 80vw;
@@ -181,8 +190,6 @@
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
-        /* 詳細画面では乗算を解除 */
-        mix-blend-mode: normal;
     }
     
     .description-text {
@@ -206,13 +213,13 @@
         z-index: 1000000 !important;
         font-weight: bold;
     }
-    #video-page.bg-white .back-btn,
-    #video-page.bg-gradient .back-btn {
+    #video-page.bg-white .back-btn {
         background-color: #333333;
         color: #ffffff;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    #video-page.bg-black .back-btn {
+    #video-page.bg-black .back-btn,
+    #video-page.bg-gradient .back-btn {
         background-color: #ffffff;
         color: #111111;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -258,10 +265,11 @@
         </div>
     </div>
 
+    <!-- 【深】エリア：ファイル名を hukai.png に指定 -->
     <div class="gradient-bridge" id="bridge-zone">
-        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
+        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
-                <img class="kanji-img" src="深.png" alt="深">
+                <img class="kanji-img" src="hukai.png" alt="深">
             </div>
         </div>
     </div>
