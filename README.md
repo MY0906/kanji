@@ -298,40 +298,38 @@
     <!-- 2. 【下の方】黒背景の漢字をまとめて表示するエリア -->
     <div class="section-black">
         
-        <!-- 明.mp4 に修正 -->
         <div class="kanji-card" onclick="openDetail('明', '明.mp4', '太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
-        <!-- 眩.mp4 に修正 -->
         <div class="kanji-card" onclick="openDetail('眩', '眩.mp4', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
-        <!-- 影2.mp4 に修正 -->
         <div class="kanji-card" onclick="openDetail('影', '影2.mp4', '光が当たって物に遮られ、うしろに黒く浮かび上がる様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="影2.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
-        <div class="kanji-card" onclick="openDetail('幻', '幻3.mp4', '糸が絡み合って形がころころと変わり、姿をくらます様子からできた漢字です。', 'black')">
+        <!-- 「幻」はこちらに入っています -->
+        <div class="kanji-card" onclick="openDetail('幻', '幻.mp4', '糸が絡み合って形がころころと変わり、姿をくらます様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
-                <video class="kanji-video" src="幻3.mp4" playsinline muted loop preload="metadata"></video>
+                <video class="kanji-video" src="幻.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
-        <div class="kanji-card" onclick="openDetail('光', '光3.mp4', '人が頭の上に松明（たいまつ）を載せて、周りをピカッと照らしている様子からできた漢字です。', 'black')">
+        <!-- 「光」はこちらに入っています -->
+        <div class="kanji-card" onclick="openDetail('光', '光.mp4', '人が頭の上に松明（たいまつ）を載せて、周りをピカッと照らしている様子からできた漢字です。', 'black')">
             <div class="video-wrapper">
-                <video class="kanji-video" src="光3.mp4" playsinline muted loop preload="metadata"></video>
+                <video class="kanji-video" src="光.mp4" playsinline muted loop preload="metadata"></video>
             </div>
         </div>
 
-        <!-- 星.mp4 に修正 -->
         <div class="kanji-card" onclick="openDetail('星', '星.mp4', '太陽（日）のもとで、芽（生）がすくすくと育つように夜空にきらきら光る星を表す漢字です。', 'black')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="星.mp4" playsinline muted loop preload="metadata"></video>
