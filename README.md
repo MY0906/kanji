@@ -121,7 +121,7 @@
         user-select: none;
     }
 
-    /* 乗算で一覧表示時の白背景を透過 */
+    /* 乗算で一覧表示時の画像の白背景を透過させる */
     .kanji-img {
         width: 100%;
         height: 100%;
@@ -148,7 +148,7 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
-    /* 「深」のとき詳細画面背景を白にして文字が見えるように調整 */
+    /* 「深」の詳細画面は背景を白にして文字が見えるようにする */
     #video-page.bg-gradient { 
         background-color: #ffffff !important; 
     }
@@ -181,7 +181,7 @@
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
-        /* 詳細画面では乗算を解除して文字をハッキリ見せる */
+        /* 詳細画面では乗算を解除 */
         mix-blend-mode: normal;
     }
     
@@ -259,9 +259,9 @@
     </div>
 
     <div class="gradient-bridge" id="bridge-zone">
-        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深_2.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
+        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
-                <img class="kanji-img" src="深_2.png" alt="深">
+                <img class="kanji-img" src="深.png" alt="深">
             </div>
         </div>
     </div>
