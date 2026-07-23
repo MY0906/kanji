@@ -1,5 +1,5 @@
 <style>
-    /* GitHubが自動生成する余計な文字やヘッダーを完全に隠す */
+    /* GitHubヘッダー隠し */
     header,
     .markdown-body header,
     body > h1:first-of-type,
@@ -26,7 +26,6 @@
         box-shadow: none !important;
     }
 
-    /* 一覧全体のレイアウト */
     #list-page {
         display: flex;
         flex-direction: column;
@@ -35,7 +34,6 @@
         background-color: #ffffff;
     }
 
-    /* 【上の方】普通の白背景の漢字エリア */
     .section-white {
         width: 100%;
         display: flex;
@@ -46,7 +44,6 @@
         background-color: #ffffff;
     }
 
-    /* 【滑らかな変化を生み出すグラデーションブリッジ】 */
     .gradient-bridge {
         width: 100%;
         padding: 120px 20px;
@@ -68,7 +65,6 @@
         position: relative;
     }
 
-    /* 【下の方】黒背景の漢字エリア */
     .section-black {
         width: 100%;
         display: flex;
@@ -79,7 +75,6 @@
         background-color: #000000;
     }
 
-    /* 漢字カードのデザイン */
     .kanji-card {
         width: 85vw;
         max-width: 450px;
@@ -95,12 +90,10 @@
         transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
     }
 
-    /* スクロールで中央に来た時の強調 */
     .kanji-card.active {
         transform: scale(1.04);
     }
 
-    /* 「深」特別な演出用スタイル */
     .kanji-card.special-fuka {
         transition: transform 0.3s ease, filter 0.3s ease;
     }
@@ -109,7 +102,6 @@
         filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
     }
 
-    /* 動画・画像表示枠 */
     .media-wrapper {
         width: 100%;
         aspect-ratio: 1 / 1;
@@ -129,7 +121,7 @@
         user-select: none;
     }
 
-    /* 画像用：mix-blend-mode: multiply で画像の白背景を自動除去 */
+    /* 乗算で一覧表示時の白背景を透過 */
     .kanji-img {
         width: 100%;
         height: 100%;
@@ -156,19 +148,14 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
+    /* 「深」のとき詳細画面背景を白にして文字が見えるように調整 */
     #video-page.bg-gradient { 
-        background: linear-gradient(
-            to bottom,
-            #111111 0%,
-            #333333 40%,
-            #111111 80%,
-            #000000 100%
-        ) !important; 
+        background-color: #ffffff !important; 
     }
     
     #video-page.bg-white .description-text { color: #333333; }
     #video-page.bg-black .description-text { color: #ffffff; }
-    #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
+    #video-page.bg-gradient .description-text { color: #333333; }
 
     .media-container {
         width: 80vw;
@@ -194,7 +181,8 @@
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
-        mix-blend-mode: multiply;
+        /* 詳細画面では乗算を解除して文字をハッキリ見せる */
+        mix-blend-mode: normal;
     }
     
     .description-text {
@@ -206,7 +194,6 @@
         font-weight: 500;
     }
 
-    /* 戻るボタン */
     .back-btn {
         position: absolute;
         top: 30px;
@@ -219,13 +206,13 @@
         z-index: 1000000 !important;
         font-weight: bold;
     }
-    #video-page.bg-white .back-btn {
+    #video-page.bg-white .back-btn,
+    #video-page.bg-gradient .back-btn {
         background-color: #333333;
         color: #ffffff;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    #video-page.bg-black .back-btn,
-    #video-page.bg-gradient .back-btn {
+    #video-page.bg-black .back-btn {
         background-color: #ffffff;
         color: #111111;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -235,125 +222,69 @@
 <!-- 一覧画面 -->
 <div id="list-page">
     
-    <!-- 1. 【上の方】白背景エリア -->
     <div class="section-white">
-        
         <div class="kanji-card" onclick="openDetail('雨', '雨.mp4', '空から水滴がぽつぽつと降ってくる様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="雨.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="雨.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('羽', '羽.mp4', '鳥のふさふさとしたはねが並んでいる様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="羽.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="羽.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('寒', '寒.mp4', '家の中で人がわらの中にくるまって、凍えている様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="寒.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="寒.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('叫', '叫.mp4', '口を大きく開けて、大きな声を張り上げてさけぶ様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="叫.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="叫.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('糸', '糸.mp4', '細い糸を何本かつむいで、束ねた形からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="糸.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="糸.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('集', '集.mp4', '木の上にたくさんの鳥が集まって止まっている様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="集.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="集.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('暑', '暑.mp4', '太陽（日）が照りつけて、お墓の上の人もうだるほどあつい様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="暑.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="暑.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('木', '木.mp4', '大地にしっかりと根を張り、枝を広げた一本の木の形からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="木.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="木.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('目', '目.mp4', '人間の目の形（ひとみとまぶた）を縦にした形からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="目.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="目.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('嵐', '嵐.mp4', '山の上を激しい風と雨が吹き荒れる様子からできた漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="嵐.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="嵐.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('林', '林.mp4', '木が２本並んで、木がたくさん生えている場所を表す漢字です。', 'white', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="林.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="林.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
     </div>
 
-    <!-- 2. 【深】動的グラデーションエリア（画像指定：深.png） -->
     <div class="gradient-bridge" id="bridge-zone">
-        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
+        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深_2.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
-                <img class="kanji-img" src="深.png" alt="深">
+                <img class="kanji-img" src="深_2.png" alt="深">
             </div>
         </div>
     </div>
 
-    <!-- 3. 【下の方】黒背景エリア -->
     <div class="section-black">
-        
         <div class="kanji-card" onclick="openDetail('明', '明.mp4', '太陽（日）と月が合わさって、辺りが明るく照らされている様子からできた漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('眩', '眩.mp4', '目（目）に光が強く差し込んで、クラクラとまぶしい様子からできた漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('影', '影2.mp4', '光が当たって物に遮られ、うしろに黒く浮かび上がる様子からできた漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="影2.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="影2.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('幻', '幻.mp4', '糸が絡み合って形がころころと変わり、姿をくらます様子からできた漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="幻.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="幻.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('光', '光.mp4', '人が頭の上に松明（たいまつ）を載せて、周りをピカッと照らしている様子からできた漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="光.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="光.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
         <div class="kanji-card" onclick="openDetail('星', '星.mp4', '太陽（日）のもとで、芽（生）がすくすくと育つように夜空にきらきら光る星を表す漢字です。', 'black', 'video')">
-            <div class="media-wrapper">
-                <video class="kanji-video" src="星.mp4" playsinline muted loop preload="metadata"></video>
-            </div>
+            <div class="media-wrapper"><video class="kanji-video" src="星.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-
     </div>
 
 </div>
@@ -379,7 +310,6 @@
 
     let savedScrollPosition = 0;
 
-    // スクロールに応じた「深」エリアの動的グラデーション計算
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -402,7 +332,6 @@
         )`;
     });
 
-    // 詳細ページを開く（動画と画像の両方に対応）
     function openDetail(kanjiName, mediaFile, description, bgType, mediaType = 'video') {
         savedScrollPosition = window.scrollY || document.documentElement.scrollTop;
 
@@ -434,7 +363,6 @@
         kanjiDesc.innerHTML = `<span style="font-size: 2.2rem; font-weight: bold;">${kanjiName}</span><br><br>${description}`;
     }
 
-    // 元の一覧ページに戻る
     function closeDetail() {
         mainKanjiVideo.pause();
         listPage.style.display = 'flex';
@@ -443,7 +371,6 @@
         window.scrollTo(0, savedScrollPosition);
     }
 
-    // スクロール時の制御
     const options = {
         root: null,
         rootMargin: "-30% 0px -30% 0px",
