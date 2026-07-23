@@ -140,12 +140,23 @@
     /* タップした漢字のエリアに合わせて詳細画面の背景も変化 */
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #111111 !important; }
-    #video-page.bg-gray { background-color: #333333 !important; }
+    
+    /* 「深」用のグラデーション背景設定 */
+    #video-page.bg-gradient { 
+        background: linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #e5e5e5 25%,
+            #777777 50%,
+            #222222 75%,
+            #111111 100%
+        ) !important; 
+    }
     
     /* 詳細画面の説明文の色調整 */
     #video-page.bg-white .description-text { color: #333333; }
     #video-page.bg-black .description-text { color: #ffffff; }
-    #video-page.bg-gray .description-text { color: #ffffff; }
+    #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
     .video-container {
         width: 80vw;
@@ -192,9 +203,9 @@
         color: #ffffff;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    /* 黒背景・グレー背景の時は白ボタン */
+    /* 黒背景・グラデーション背景の時は白ボタン */
     #video-page.bg-black .back-btn,
-    #video-page.bg-gray .back-btn {
+    #video-page.bg-gradient .back-btn {
         background-color: #ffffff;
         color: #111111;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -277,7 +288,8 @@
 
     <!-- 白から黒へなめらかに変化するグラデーション帯 -->
     <div class="gradient-bridge">
-        <div class="kanji-card" onclick="openDetail('深', '深.mp4', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gray')">
+        <!-- 背景タイプを 'gradient' に変更 -->
+        <div class="kanji-card" onclick="openDetail('深', '深.mp4', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient')">
             <div class="video-wrapper">
                 <video class="kanji-video" src="深.mp4" playsinline muted loop preload="metadata"></video>
             </div>
@@ -356,8 +368,8 @@
         videoPage.className = '';
         if (bgType === 'white') {
             videoPage.classList.add('bg-white');
-        } else if (bgType === 'gray') {
-            videoPage.classList.add('bg-gray');
+        } else if (bgType === 'gradient') {
+            videoPage.classList.add('bg-gradient');
         } else {
             videoPage.classList.add('bg-black');
         }
@@ -375,7 +387,7 @@
         listPage.style.display = 'flex';
         videoPage.style.display = 'none';
 
-        // 記憶しておいたスクロール位置に一瞬で復元する
+        // 記憶しておいたスクロール位置に復元する
         window.scrollTo(0, savedScrollPosition);
     }
 
