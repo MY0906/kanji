@@ -45,20 +45,26 @@
         background-color: #ffffff;
     }
 
-    /* パララックス・動的背景ブリッジエリア */
+    /* ★超滑らかなグラデーションブリッジエリア★ */
     .gradient-bridge {
         width: 100%;
-        padding: 250px 20px;
+        padding: 120px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         box-sizing: border-box;
+        /* イージングを施した多段階グラデーション */
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
-            #e6e6e6 30%,
-            #777777 50%,
-            #1a1a1a 70%,
+            #f7f7f7 10%,
+            #e3e3e3 22%,
+            #c4c4c4 35%,
+            #999999 48%,
+            #666666 62%,
+            #383838 75%,
+            #181818 88%,
             #000000 100%
         );
         will-change: background;
@@ -98,9 +104,61 @@
         transform: scale(1.04);
     }
 
-    /* 「深」カードのインタラクティブ浮遊＆グロー演出 */
+    /* ★1080 x 1080px の泡アニメーションステージ★ */
+    .bubble-stage-1080 {
+        width: 100vw;
+        max-width: 1080px;
+        height: 100vw;
+        max-height: 1080px;
+        aspect-ratio: 1 / 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+
+    /* 泡（バブル）要素のスタイル */
+    .sea-bubble {
+        position: absolute;
+        bottom: -60px;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0.4));
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), inset 0 0 6px rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+        animation: floatUp 8s infinite ease-in-out;
+        will-change: transform, opacity;
+    }
+
+    /* 泡の上昇・ゆらめきキーフレーム */
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) translateX(0) scale(0.6);
+            opacity: 0;
+        }
+        20% {
+            opacity: 0.7;
+        }
+        50% {
+            transform: translateY(-500px) translateX(30px) scale(1);
+            opacity: 0.8;
+        }
+        80% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translateY(-1100px) translateX(-20px) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    /* 「深」カードのインタラクティブ演出 */
     .kanji-card.special-fuka {
-        transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.3, 1), filter 0.15s cubic-bezier(0.1, 0.8, 0.3, 1);
+        z-index: 10;
+        transition: transform 0.2s cubic-bezier(0.1, 0.8, 0.3, 1), filter 0.2s cubic-bezier(0.1, 0.8, 0.3, 1);
         will-change: transform, filter;
     }
 
@@ -162,9 +220,9 @@
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
-            #d9d9d9 20%,
-            #888888 50%,
-            #222222 80%,
+            #e3e3e3 25%,
+            #777777 50%,
+            #222222 75%,
             #000000 100%
         ) !important; 
     }
@@ -239,7 +297,6 @@
     }
 </style>
 
-<!-- 一覧画面 -->
 <div id="list-page">
     
     <div class="section-white">
@@ -278,11 +335,12 @@
         </div>
     </div>
 
-    <!-- 【深】パララックス＆グロー連動エリア -->
     <div class="gradient-bridge" id="bridge-zone">
-        <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
-            <div class="media-wrapper">
-                <img class="kanji-img" src="hukai_transparent.png" alt="深">
+        <div class="bubble-stage-1080" id="bubble-stage">
+            <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
+                <div class="media-wrapper">
+                    <img class="kanji-img" src="hukai_transparent.png" alt="深">
+                </div>
             </div>
         </div>
     </div>
@@ -310,7 +368,6 @@
 
 </div>
 
-<!-- 詳細画面 -->
 <div id="video-page">
     <div class="back-btn" onclick="closeDetail()">← もどる</div>
     <div class="media-container" id="detail-media-container">
@@ -328,10 +385,39 @@
     const kanjiDesc = document.getElementById('kanji-desc');
     const bridgeZone = document.getElementById('bridge-zone');
     const fukaCard = document.getElementById('fuka-card');
+    const bubbleStage = document.getElementById('bubble-stage');
 
     let savedScrollPosition = 0;
 
-    /* ★リアルタイム連動（Parallax背景＆カードの浮遊・グロー制御）★ */
+    /* ★海バブル（泡）の自動生成★ */
+    function createBubbles() {
+        if (!bubbleStage) return;
+        const bubbleCount = 22; // 泡の個数
+        
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('sea-bubble');
+            
+            // ランダムなサイズ (8px ～ 36px)
+            const size = Math.random() * 28 + 8;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // ステージ内のランダムな横位置 (0% ～ 95%)
+            bubble.style.left = `${Math.random() * 95}%`;
+            
+            // アニメーションの速度と遅延をばらバラにして自然に
+            const duration = Math.random() * 6 + 6; // 6s ～ 12s
+            const delay = Math.random() * 8; // 0s ～ 8s
+            bubble.style.animationDuration = `${duration}s`;
+            bubble.style.animationDelay = `${delay}s`;
+            
+            bubbleStage.appendChild(bubble);
+        }
+    }
+    createBubbles();
+
+    /* ★超スムーズ・滑らかな背景パララックス＆「深」発光制御★ */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -339,37 +425,38 @@
         const cardRect = fukaCard.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // 1. 背景グラデーションのパララックス追従
-        let bridgeProgress = (windowHeight - bridgeRect.top) / (windowHeight + bridgeRect.height);
-        bridgeProgress = Math.max(0, Math.min(1, bridgeProgress));
+        // 滑らかな色のカーブ計算
+        let progress = (windowHeight - bridgeRect.top) / (windowHeight + bridgeRect.height);
+        progress = Math.max(0, Math.min(1, progress));
 
-        const mid = Math.round(bridgeProgress * 100);
-        const topStop = Math.max(0, mid - 35);
-        const bottomStop = Math.min(100, mid + 35);
+        // 二次関数イージングで色の変化速度をマイルドに
+        const easedProgress = Math.pow(progress, 1.2);
+
+        const stop1 = Math.round(easedProgress * 15);
+        const stop2 = Math.round(easedProgress * 40);
+        const stop3 = Math.round(easedProgress * 65);
+        const stop4 = Math.round(easedProgress * 88);
 
         bridgeZone.style.background = `linear-gradient(
             to bottom,
             #ffffff 0%,
-            #e6e6e6 ${topStop}%,
-            #777777 ${mid}%,
-            #1a1a1a ${bottomStop}%,
+            #f5f5f5 ${stop1}%,
+            #d5d5d5 ${stop2}%,
+            #707070 ${stop3}%,
+            #202020 ${stop4}%,
             #000000 100%
         )`;
 
-        // 2. 「深」カードが画面中央を通る際のスケール＆グロー効果
+        // 画面中央でのカード拡大＆グロー（発光）
         const cardCenter = cardRect.top + cardRect.height / 2;
         const windowCenter = windowHeight / 2;
         
-        // 画面中央からの距離（0：ピッタリ中央、1：画面端）
         const distanceFromCenter = Math.abs(windowCenter - cardCenter) / (windowHeight / 2);
-        const closeness = Math.max(0, 1 - distanceFromCenter); // 1に近いほど画面中央
+        const closeness = Math.max(0, 1 - distanceFromCenter);
 
-        // 浮き上がり量 (最大1.08倍)
-        const scale = 1.0 + (closeness * 0.08);
-        
-        // グロー効果の強さ (輝きとぼかし範囲の制御)
-        const shadowBlur = closeness * 25;
-        const shadowAlpha = closeness * 0.5;
+        const scale = 1.0 + (closeness * 0.06);
+        const shadowBlur = closeness * 30;
+        const shadowAlpha = closeness * 0.6;
 
         fukaCard.style.transform = `scale(${scale})`;
         fukaCard.style.filter = `drop-shadow(0 0 ${shadowBlur}px rgba(255, 255, 255, ${shadowAlpha}))`;
