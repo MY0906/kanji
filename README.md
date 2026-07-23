@@ -45,22 +45,25 @@
         background-color: #ffffff;
     }
 
-    /* 動的グラデーションエリア */
+    /* ★滑らかに超広範囲に広がる動的グラデーションエリア★ */
     .gradient-bridge {
         width: 100%;
-        padding: 120px 20px;
+        padding: 200px 20px; /* 上下の距離を広げてグラデーションを長く見せる */
         display: flex;
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
+        /* 滑らかな階調（イージング）を設定 */
         background: linear-gradient(
             to bottom,
             #ffffff 0%,
-            #f2f2f2 15%,
-            #cdcdcd 35%,
-            #777777 50%,
-            #333333 65%,
-            #111111 85%,
+            #f9f9f9 10%,
+            #e6e6e6 25%,
+            #cccccc 40%,
+            #888888 50%,
+            #444444 60%,
+            #1a1a1a 75%,
+            #0a0a0a 90%,
             #000000 100%
         );
         transition: background 0.2s linear;
@@ -131,7 +134,6 @@
         user-select: none;
     }
 
-    /* 透過PNG画像表示用（リセット徹底強化） */
     .kanji-img {
         width: 100%;
         height: 100%;
@@ -163,7 +165,6 @@
     #video-page.bg-white { background-color: #ffffff !important; }
     #video-page.bg-black { background-color: #000000 !important; }
     
-    /* 詳細画面のグラデーション背景 */
     #video-page.bg-gradient { 
         background: linear-gradient(
             to bottom,
@@ -336,6 +337,7 @@
 
     let savedScrollPosition = 0;
 
+    /* ★スクロール位置に合わせて滑らかに動くグラデーション★ */
     window.addEventListener('scroll', () => {
         if (!bridgeZone || !fukaCard) return;
 
@@ -345,16 +347,18 @@
         let progress = (windowHeight - rect.top) / (windowHeight + rect.height);
         progress = Math.max(0, Math.min(1, progress));
 
-        const midPoint = Math.round(progress * 100);
-        const startPoint = Math.max(0, midPoint - 30);
-        const endPoint = Math.min(100, midPoint + 30);
+        // 計算ポイントを細かく分けて階調をなめらかに表現
+        const p1 = Math.round(progress * 100);
+        const p0 = Math.max(0, p1 - 35);
+        const p2 = Math.min(100, p1 + 35);
 
         bridgeZone.style.background = `linear-gradient(
             to bottom,
             #ffffff 0%,
-            #cccccc ${startPoint}%,
-            #555555 ${midPoint}%,
-            #000000 ${endPoint}%
+            #e6e6e6 ${p0}%,
+            #777777 ${p1}%,
+            #1a1a1a ${p2}%,
+            #000000 100%
         )`;
     });
 
