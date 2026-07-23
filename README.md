@@ -121,12 +121,22 @@
         align-items: center;
     }
 
-    .kanji-video, .kanji-img {
+    .kanji-video {
         width: 100%;
         height: 100%;
         object-fit: contain;
         -webkit-user-select: none;
         user-select: none;
+    }
+
+    /* 画像用：mix-blend-mode: multiply で画像の白背景を自動除去 */
+    .kanji-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        -webkit-user-select: none;
+        user-select: none;
+        mix-blend-mode: multiply;
     }
 
     /* 詳細画面 */
@@ -168,13 +178,23 @@
         align-items: center;
     }
     
-    #main-kanji-video, #main-kanji-img {
+    #main-kanji-video {
         width: 100%;
         height: 100%;
         object-fit: contain;
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
+    }
+
+    #main-kanji-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+        mix-blend-mode: multiply;
     }
     
     .description-text {
@@ -286,7 +306,7 @@
 
     </div>
 
-    <!-- 2. 【深】背景透過PNGを使用した動的グラデーションエリア -->
+    <!-- 2. 【深】動的グラデーションエリア（画像指定：深.png） -->
     <div class="gradient-bridge" id="bridge-zone">
         <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', '深.png', '川の水が底深く流れていて、中に探り入れる様子からできた漢字です。', 'gradient', 'image')">
             <div class="media-wrapper">
