@@ -232,9 +232,7 @@
         display: none;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        padding: 60px 20px 20px 20px;
-        box-sizing: border-box;
+        justify-content: center;
         z-index: 999999 !important;
     }
 
@@ -257,16 +255,14 @@
     #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
 
     .media-container {
-        width: 90vw;
-        height: 48vh;
-        max-height: 400px;
+        width: 80vw;
+        height: 55vh;
         display: flex;
         justify-content: center;
         align-items: center;
         background: transparent !important;
         position: relative;
         overflow: hidden;
-        flex-shrink: 0;
     }
     
     #main-kanji-video {
@@ -295,22 +291,21 @@
     }
     
     .description-text {
-        font-size: clamp(0.85rem, 1.6vw, 1.05rem);
-        margin-top: 8px;
-        text-align: left;
-        max-width: 88vw;
-        line-height: 1.35;
+        font-size: 1.5rem;
+        margin-top: 25px;
+        text-align: center;
+        max-width: 85%;
+        line-height: 1.7;
         font-weight: 500;
         z-index: 2;
-        overflow: visible;
     }
 
     .back-btn {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        font-size: 1.1rem;
-        padding: 8px 18px;
+        top: 30px;
+        left: 30px;
+        font-size: 1.3rem;
+        padding: 10px 24px;
         border-radius: 30px;
         cursor: pointer;
         user-select: none;
@@ -334,37 +329,37 @@
 <div id="list-page">
     
     <div class="section-white">
-        <div class="kanji-card" onclick="openDetail('雨', '雨.mp4', 'あめ。あめふり。また、あめのように降り注ぐもの。', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('雨', '雨.mp4', '雲から水滴が地上へ滴り落ちる様子を象った漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="雨.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('羽', '羽.mp4', '①はね。つばさ。「羽毛」「羽化」「翼羽」<br>②鳥などを数える語。<br>③「出羽(でわ)の国」の略。「羽州」「羽前」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('羽', '羽.mp4', '鳥の翼や、左右に並んだ羽毛の形から生まれた漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="羽.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('寒', '寒.mp4', '①さむい。つめたい。ぞっとする。「寒色」「寒心」「寒冷」<br>②さびしい。まずしい。いやしい。「寒煙」「寒酸」「寒村」<br>③かん。二十四節気の一つ。立春前のほぼ三〇日間。「寒中」「寒梅」「大寒」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('寒', '寒.mp4', '家の中でわらを敷き詰め、身を縮めて寒さに耐える様子から生まれた漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="寒.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('叫', '叫.mp4', 'さけぶ。大声をあげる。「叫喚」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('叫', '叫.mp4', '口を大きく開き、息を強く吐き出して大声を上げる様子を表現した漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="叫.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('糸', '糸.mp4', '①いと。いとのように細いもの。「金糸」「菌糸」<br>②糸を張った楽器。弦楽器。「糸竹」「糸管」<br>③数量の単位。一の一万分の一。<br>④ごくわずか。「糸毫(シゴウ)」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('糸', '糸.mp4', 'より合わせた細いより糸を束ねた形から作られた漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="糸.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('集', '集.mp4', '①あつまる。あつめる。つどう。よせあつめる。「集散」「集計」「召集」<br>②あつまり。つどい。「集会」「集落」<br>③作品をあつめたもの。「画集」「詩集」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('集', '集.mp4', '樹木の上に群がる多くの鳥たちを表現した漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="集.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('暑', '暑.mp4', '①あつい。気温が高い。「暑気」「炎暑」「酷暑」<br>②あつい季節。特に、夏の土用一八日間。「暑中」「大暑」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('暑', '暑.mp4', '強い太陽（日）の光が照射し、気候が著しく熱気を帯びる様子を表す漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="暑.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('木', '木.mp4', '①き。たちき。「木石」「樹木」<br>②建築や器具の用材。「木刀」「材木」<br>③五行の一つ。<br>④七曜の一つ。木曜。<br>⑤かざりけがない。「木訥(ボクトツ)」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('木', '木.mp4', '大地に根を張り、幹から枝葉を大きく広げた樹木の姿を象った漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="木.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('目', '目.mp4', '①め。まなこ。「目前」「耳目」<br>②見る。見つめる。「目撃」「注目」<br>③かなめ。要点。「眼目」「要目」<br>④かしら。主だった人。「頭目」<br>⑤見出し。な。なまえ。「目次」「品目」<br>⑥小分けしたもの。「科目」「項目」<br>⑦生物分類上の一段階。「霊長目」<br>⑧かお。名誉。「面目」<br>⑨いま。ただいま。「目下」<br>⑩きざみ。さかい。すじ。「木目」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('目', '目.mp4', '人間の目の輪郭と瞳を縦向きに図形化した漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="目.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('嵐', '嵐.mp4', '①あらし。激しく吹く風。「山嵐」「春嵐」<br>②山にたちこめる気。もや。「嵐気」「青嵐」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('嵐', '嵐.mp4', '山間部で激しく吹き荒れる暴風雨（山＋風）の情景を表した漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="嵐.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('林', '林.mp4', '①はやし。木やタケが群がり生えている所。「林間」「森林」<br>②物事が多く集まっていること。「林立」「書林」', 'white', 'video')">
+        <div class="kanji-card" onclick="openDetail('林', '林.mp4', '「木」を2つ並べ、樹木が自生し群生している場所を示す漢字。', 'white', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="林.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
     </div>
@@ -372,7 +367,7 @@
     <!-- 【深】広域滑らかグラデーション ＆ 泡エリア -->
     <div class="gradient-bridge" id="bridge-zone">
         <div class="bubble-stage-compact" id="bubble-stage">
-            <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '①底がふかい。「深海」「水深」<br>②おくぶかい。「深遠」「深長」<br>③はなはだしい。「深刻」<br>④ねんごろ。こまやかな。「深交」「深情」<br>⑤色がこい。「深紅」<br>⑥夜がふける。「深更」', 'gradient', 'image')">
+            <div class="kanji-card special-fuka" id="fuka-card" onclick="openDetail('深', 'hukai_transparent.png', '川の水底が深く、手や道具を入れ探る様子から生まれた漢字。', 'gradient', 'image')">
                 <div class="media-wrapper">
                     <img class="kanji-img" src="hukai_transparent.png" alt="深">
                 </div>
@@ -381,22 +376,22 @@
     </div>
 
     <div class="section-black">
-        <div class="kanji-card" onclick="openDetail('明', '明.mp4', '①あかるい。「明星」「清明」<br>②あかり。あかりがつく。「明滅」「灯明」<br>③あきらか。あきらかにする。「明確」「証明」<br>④さとい。かしこい。「明君」「賢明」<br>⑤あける。夜があける。また、つぎの。あす。「明晩」「未明」<br>⑥神。また、神聖なもの。「神明」<br>⑦みん。中国の王朝名。', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('明', '明.mp4', '太陽（日）と月という2つの光明が合わさり、輝く様子を表した漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="明.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('眩', '眩.mp4', '①くらむ。目が回る。めまい。「眩暈(ゲンウン)」<br>②くらます。まどわす。「眩惑」<br>③まぶしい。まばゆい。<br>④まう。まどう。判断がみだれる。', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('眩', '眩.mp4', '強烈な光を目（目）に受けて、視界がかすみ眩惑（げんわく）される様子を表す漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="眩.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('影', '影2.mp4', '①かげ。光がさえぎられてできる黒いかげ。「影響」「陰影」<br>②ひかり。日月などのひかり。「月影」「光影」<br>③光に映し出されたすがた。かたち。「影像」「印影」「撮影」<br>④まぼろし。', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('影', '影2.mp4', '物体線上に光が射した際、その背後に生じる暗い輪郭線（陰影）を表す漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="影2.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('幻', '幻.mp4', '①まぼろし。実在しないのに、あるように見えるもの。「幻影」「夢幻」<br>②まどわす。たぶらかす。「幻術」「幻惑」', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('幻', '幻.mp4', '実体の捉えにくいものが目まぐるしく変化し、姿をくらます怪異な様子を表す漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="幻.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('光', '光.mp4', '①ひかる。てらす。ひかり。あかり。かがやき。「光線」「光明」「月光」<br>②かがやかしいこと。ほまれ。名声。「光臨」「栄光」<br>③時間。とき。「光陰」「消光」<br>④ありさま。けしき。「光景」「風光」', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('光', '光.mp4', '頭上に松明（たいまつ）を掲げ、周囲を輝かしく照らす人物の姿を象った漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="光.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
-        <div class="kanji-card" onclick="openDetail('星', '星.mp4', '①ほし。天体。「星座」「恒星」<br>②とし。年月。「星霜」<br>③重要な人物。「巨星」「将星」<br>④めあて。小さな点。「図星」', 'black', 'video')">
+        <div class="kanji-card" onclick="openDetail('星', '星.mp4', '「日（太陽・天体）」と「生（生じる）」が組み合わさり、夜空に燦然（さんぜん）と輝く天体を表した漢字。', 'black', 'video')">
             <div class="media-wrapper"><video class="kanji-video" src="星.mp4" playsinline muted loop preload="metadata"></video></div>
         </div>
     </div>
@@ -558,7 +553,7 @@
             clearDetailBubbles();
         }
 
-        kanjiDesc.innerHTML = `<span style="font-size: 1.6rem; font-weight: bold; text-align: center; display: block; margin-bottom: 4px;">${kanjiName}</span>${description}`;
+        kanjiDesc.innerHTML = `<span style="font-size: 2.2rem; font-weight: bold;">${kanjiName}</span><br><br>${description}`;
     }
 
     function closeDetail() {
