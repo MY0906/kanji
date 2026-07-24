@@ -586,8 +586,7 @@
                     card.classList.remove('active');
                 }
                 if (video) {
-                    video.pause();
-                    video.currentTime = 0;
+                    video.pause(); /* その場で一時停止し、最初の位置に戻さない */
                 }
             }
         });
