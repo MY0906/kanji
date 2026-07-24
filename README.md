@@ -233,6 +233,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 40px 20px 20px 20px;
+        box-sizing: border-box;
         z-index: 999999 !important;
     }
 
@@ -256,13 +258,15 @@
 
     .media-container {
         width: 80vw;
-        height: 50vh;
+        height: 35vh;
+        max-height: 280px;
         display: flex;
         justify-content: center;
         align-items: center;
         background: transparent !important;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
     }
     
     #main-kanji-video {
@@ -291,23 +295,22 @@
     }
     
     .description-text {
-        font-size: 1.3rem;
-        margin-top: 20px;
+        font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+        margin-top: 10px;
         text-align: left;
-        max-width: 85%;
-        max-height: 25vh;
-        overflow-y: auto;
-        line-height: 1.6;
+        max-width: 85vw;
+        line-height: 1.45;
         font-weight: 500;
         z-index: 2;
+        overflow: visible;
     }
 
     .back-btn {
         position: absolute;
-        top: 30px;
-        left: 30px;
-        font-size: 1.3rem;
-        padding: 10px 24px;
+        top: 25px;
+        left: 25px;
+        font-size: 1.2rem;
+        padding: 8px 20px;
         border-radius: 30px;
         cursor: pointer;
         user-select: none;
@@ -555,7 +558,7 @@
             clearDetailBubbles();
         }
 
-        kanjiDesc.innerHTML = `<span style="font-size: 2.2rem; font-weight: bold; text-align: center; display: block;">${kanjiName}</span><br>${description}`;
+        kanjiDesc.innerHTML = `<span style="font-size: 1.8rem; font-weight: bold; text-align: center; display: block; margin-bottom: 6px;">${kanjiName}</span>${description}`;
     }
 
     function closeDetail() {
