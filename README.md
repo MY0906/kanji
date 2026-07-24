@@ -232,8 +232,8 @@
         display: none;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 40px 20px 20px 20px;
+        justify-content: flex-start;
+        padding: 60px 20px 20px 20px;
         box-sizing: border-box;
         z-index: 999999 !important;
     }
@@ -257,9 +257,9 @@
     #video-page.bg-gradient .description-text { color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
 
     .media-container {
-        width: 80vw;
-        height: 35vh;
-        max-height: 280px;
+        width: 90vw;
+        height: 48vh;
+        max-height: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -295,11 +295,11 @@
     }
     
     .description-text {
-        font-size: clamp(0.9rem, 1.8vw, 1.15rem);
-        margin-top: 10px;
+        font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+        margin-top: 8px;
         text-align: left;
-        max-width: 85vw;
-        line-height: 1.45;
+        max-width: 88vw;
+        line-height: 1.35;
         font-weight: 500;
         z-index: 2;
         overflow: visible;
@@ -307,10 +307,10 @@
 
     .back-btn {
         position: absolute;
-        top: 25px;
-        left: 25px;
-        font-size: 1.2rem;
-        padding: 8px 20px;
+        top: 20px;
+        left: 20px;
+        font-size: 1.1rem;
+        padding: 8px 18px;
         border-radius: 30px;
         cursor: pointer;
         user-select: none;
@@ -558,7 +558,7 @@
             clearDetailBubbles();
         }
 
-        kanjiDesc.innerHTML = `<span style="font-size: 1.8rem; font-weight: bold; text-align: center; display: block; margin-bottom: 6px;">${kanjiName}</span>${description}`;
+        kanjiDesc.innerHTML = `<span style="font-size: 1.6rem; font-weight: bold; text-align: center; display: block; margin-bottom: 4px;">${kanjiName}</span>${description}`;
     }
 
     function closeDetail() {
